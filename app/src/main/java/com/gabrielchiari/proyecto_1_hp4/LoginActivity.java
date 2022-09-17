@@ -2,8 +2,13 @@ package com.gabrielchiari.proyecto_1_hp4;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.gabrielchiari.proyecto_1_hp4.data.DataStudent;
 
@@ -12,12 +17,17 @@ import java.util.ArrayList;
 public class LoginActivity extends AppCompatActivity {
 
     ArrayList<DataStudent> Lista;
+    EditText et_cedula;
+    Button btnVotar;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        et_cedula = findViewById(R.id.et_cedula);
+        btnVotar = findViewById(R.id.btnVotar);
 
         Lista = new ArrayList<DataStudent>();
 
@@ -61,5 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         Lista.add(new DataStudent("03-0752-001461"));
         Lista.add(new DataStudent("03-0745-000950"));
 
+        Intent votado = getIntent();
+        };
     }
-}
+
