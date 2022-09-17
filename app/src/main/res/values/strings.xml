@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Proyecto-1_HP4</string>
+    <string name="welcome">Bienvenido</string>
+    <string name="enter_cedula">Introduzca la cedula</string>
+    <string name="cedula">Cedula</string>
+    <string name="rector_elections">Elecciones a Rector</string>
+    <string name="utp">Universidad Tecnológica de Panamá</string>
+    <string name="invalid_cedula">Cedula Invalida</string>
+    <string name="done_vote">Ya realizo su voto</string>
+    <string name="vote">Votar</string>
+    <string name="actual_results">Resultos Actuales</string>
 </resources>
