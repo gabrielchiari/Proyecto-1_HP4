@@ -7,6 +7,11 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
 import com.gabrielchiari.proyecto_1_hp4.data.DataCandidate;
 import com.gabrielchiari.proyecto_1_hp4.data.DataStudent;
 
@@ -32,16 +37,12 @@ public class LoginActivity extends AppCompatActivity {
         initStudentData();
         listOfCandidates = new ArrayList<DataCandidate>();
         initCandidateData();
-
-
-        Intent votado = getIntent();
-
-        }
+    }
 
     private void initCandidateData() {
-        listOfCandidates.add(new DataCandidate(1,R.drawable.IngMartinCandanedo,getResources().getString(R.string.candidato_martin_candanedo)));
-        listOfCandidates.add(new DataCandidate(2,R.drawable.MgtrVivianValenzuelaR,getResources().getString(R.string.candidato_vivian_valenzuela)));
-        listOfCandidates.add(new DataCandidate(3,R.drawable.OmarOAizpuruaP,getResources().getString(R.string.candidato_omar_aizpurua)));
+        listOfCandidates.add(new DataCandidate(1, R.drawable.IngMartinCandanedo, getResources().getString(R.string.candidato_martin_candanedo)));
+        listOfCandidates.add(new DataCandidate(2, R.drawable.MgtrVivianValenzuelaR, getResources().getString(R.string.candidato_vivian_valenzuela)));
+        listOfCandidates.add(new DataCandidate(3, R.drawable.OmarOAizpuruaP, getResources().getString(R.string.candidato_omar_aizpurua)));
     }
 
     private void initStudentData() {
@@ -85,5 +86,38 @@ public class LoginActivity extends AppCompatActivity {
         listOfStudents.add(new DataStudent("03-0752-001461"));
         listOfStudents.add(new DataStudent("03-0745-000950"));
     }
+
+
+    public void revision() {
+        for (DataStudent estudiante : listOfStudents) {
+            if (et_cedula.getText().toString().equals(estudiante.getCedula())) {
+                if (estudiante.getVoted() == false) {
+                    Intent votar = new Intent(getApplicationContext(), VoteActivity.class);
+                } else {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Ya ha votado", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        }
+        Toast toast = Toast.makeText(getApplicationContext(), "Cedula invalida", Toast.LENGTH_LONG);
+        toast.show();
+    }
+
+
+    public void voto() {
+        for (DataStudent estudiante : listOfStudents) {
+            if (et_cedula.getText().toString().equals(estudiante.getCedula())) {
+                Intent intent = getIntent();
+                estudiante.setVoted(intent.getBooleanExtra("voto_rec", false));
+
+            }
+        }
+    }
 }
+
+
+
+
+
+
 
