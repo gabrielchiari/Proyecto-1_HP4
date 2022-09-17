@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_marginHorizontal="15dp"
+    android:paddingVertical="20dp"
+    >
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity=""
+        >
+        <RadioButton
+            android:id="@+id/rbCheked"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            />
+    </RadioGroup>
+
+    <ImageView
+        android:id="@+id/ivProfile"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="25dp"
+        tools:srcCompat="@drawable/IngMartinCandanedo" />
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        tools:text="Ing. Martin E. Candanedo, PhD"
+        />
+
+</LinearLayout>

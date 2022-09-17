@@ -9,4 +9,7 @@
     <string name="done_vote">Ya realizo su voto</string>
     <string name="vote">Votar</string>
     <string name="actual_results">Resultos Actuales</string>
+    <string name="candidato_martin_candanedo">Martin E. Candanedo, PhD</string>
+    <string name="candidato_omar_aizpurua">Omar O. Aizpurúa P.</string>
+    <string name="candidato_vivian_valenzuela">Vivian Valenzuela R.</string>
 </resources>

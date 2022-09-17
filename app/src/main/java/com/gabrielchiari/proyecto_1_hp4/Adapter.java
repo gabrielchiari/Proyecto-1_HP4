@@ -1,27 +1,56 @@
 package com.gabrielchiari.proyecto_1_hp4;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.TextView;
+
+import com.gabrielchiari.proyecto_1_hp4.data.DataCandidate;
+
+import java.util.List;
+
 
 public class Adapter extends BaseAdapter {
-    @Override
+    Context contexto;
+    List<DataCandidate> candidates;
+
+    public Adapter(Context contexto, List<DataCandidate> listaObjetos) {
+        this.contexto = contexto;
+        candidates = listaObjetos;
+    }
+
     public int getCount() {
+        return candidates.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return candidates.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
         return 0;
     }
 
     @Override
-    public Object getItem(int i) {
-        return null;
-    }
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View vista = convertView;
+        LayoutInflater inflate = LayoutInflater.from(contexto);
+        vista = inflate.inflate(R.layout.vote_container_item, null);
 
-    @Override
-    public long getItemId(int i) {
-        return 0;
-    }
+        ImageView imagen = (ImageView) vista.findViewById(R.id.ivProfile);
+        TextView nombre = (TextView) vista.findViewById(R.id.txtName);
+        RadioButton isChecked = (RadioButton) vista.findViewById(R.id.rbCheked);
 
-    @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        return null;
+        nombre.setText(candidates.get(position).getAvatar());
+        imagen.setImageResource(candidates.get(position).getAvatar());
+
+        return vista;
     }
 }
