@@ -1,16 +1,13 @@
 package com.gabrielchiari.proyecto_1_hp4;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gabrielchiari.proyecto_1_hp4.data.DataCandidate;
 import com.gabrielchiari.proyecto_1_hp4.data.DataStudent;
@@ -37,12 +34,19 @@ public class LoginActivity extends AppCompatActivity {
         initStudentData();
         listOfCandidates = new ArrayList<DataCandidate>();
         initCandidateData();
+
+        btnVotar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                revision();
+            }
+        });
     }
 
     private void initCandidateData() {
-        listOfCandidates.add(new DataCandidate(1, R.drawable.IngMartinCandanedo, getResources().getString(R.string.candidato_martin_candanedo)));
-        listOfCandidates.add(new DataCandidate(2, R.drawable.MgtrVivianValenzuelaR, getResources().getString(R.string.candidato_vivian_valenzuela)));
-        listOfCandidates.add(new DataCandidate(3, R.drawable.OmarOAizpuruaP, getResources().getString(R.string.candidato_omar_aizpurua)));
+        listOfCandidates.add(new DataCandidate(1, R.drawable.ing_martin_candanedo, getResources().getString(R.string.candidato_martin_candanedo)));
+        listOfCandidates.add(new DataCandidate(2, R.drawable.mgtr_vivian_valenzuelar, getResources().getString(R.string.candidato_vivian_valenzuela)));
+        listOfCandidates.add(new DataCandidate(3, R.drawable.omar_o_aizpurua_p, getResources().getString(R.string.candidato_omar_aizpurua)));
     }
 
     private void initStudentData() {
@@ -93,13 +97,14 @@ public class LoginActivity extends AppCompatActivity {
             if (et_cedula.getText().toString().equals(estudiante.getCedula())) {
                 if (estudiante.getVoted() == false) {
                     Intent votar = new Intent(getApplicationContext(), VoteActivity.class);
+                    startActivity(votar);
                 } else {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Ya ha votado", Toast.LENGTH_LONG);
+                    Toast toast = Toast.makeText(getApplicationContext(), getResources().getText(R.string.done_vote), Toast.LENGTH_LONG);
                     toast.show();
                 }
             }
         }
-        Toast toast = Toast.makeText(getApplicationContext(), "Cedula invalida", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(), getResources().getText(R.string.invalid_cedula), Toast.LENGTH_LONG);
         toast.show();
     }
 

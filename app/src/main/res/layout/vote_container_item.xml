@@ -8,26 +8,15 @@
     android:gravity="center_vertical"
     android:layout_marginHorizontal="15dp"
     android:paddingVertical="20dp"
-    >
-
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity=""
-        >
-        <RadioButton
-            android:id="@+id/rbCheked"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            />
-    </RadioGroup>
+    tools:ignore="UseCompoundDrawables">
 
     <ImageView
         android:id="@+id/ivProfile"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginEnd="25dp"
-        tools:srcCompat="@drawable/IngMartinCandanedo" />
+        tools:srcCompat="@drawable/ing_martin_candanedo"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/txtName"

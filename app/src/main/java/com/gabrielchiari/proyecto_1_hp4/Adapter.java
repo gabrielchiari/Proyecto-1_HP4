@@ -46,9 +46,8 @@ public class Adapter extends BaseAdapter {
 
         ImageView imagen = (ImageView) vista.findViewById(R.id.ivProfile);
         TextView nombre = (TextView) vista.findViewById(R.id.txtName);
-        RadioButton isChecked = (RadioButton) vista.findViewById(R.id.rbCheked);
 
-        nombre.setText(candidates.get(position).getAvatar());
+        nombre.setText(candidates.get(position).getFullName());
         imagen.setImageResource(candidates.get(position).getAvatar());
 
         return vista;
