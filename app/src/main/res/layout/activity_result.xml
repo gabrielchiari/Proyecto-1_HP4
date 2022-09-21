@@ -10,7 +10,139 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="169dp"
-        tools:layout_editor_absoluteY="88dp" />
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="33dp"
+        android:text="Votos Escrutados"
+        android:textColor="#090808"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="42dp"
+        android:layout_marginBottom="28dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:srcCompat="@drawable/ing_martin_candanedo" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="44dp"
+        android:layout_marginBottom="21dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView4"
+        app:layout_constraintEnd_toStartOf="@+id/tvVivian"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:srcCompat="@drawable/mgtr_vivian_valenzuelar" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="105dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:srcCompat="@drawable/omar_o_aizpurua_p" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="39dp"
+        android:layout_marginBottom="26dp"
+        android:text="Martin Candanedo"
+        android:textColor="#131111"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvMartin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView2" />
+
+    <TextView
+        android:id="@+id/tvMartin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="62dp"
+        android:text="Votos: 0, Porcentaje: 0%"
+        android:textColor="#0C0B0B"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="39dp"
+        android:text="Vivian Valenzuela"
+        android:textColor="#131111"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvVivian"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvVivian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="33dp"
+        android:text="Votos: 0, Porcentaje: 0%"
+        android:textColor="#0C0C0C"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="72dp"
+        android:text="Omar Aizpurua"
+        android:textColor="#0E0D0D"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView4"
+        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+
+    <TextView
+        android:id="@+id/tvOmar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="33dp"
+        android:text="Votos: 0, Porcentaje: 0%"
+        android:textColor="#0C0B0B"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="57dp"
+        android:layout_marginEnd="58dp"
+        android:layout_marginBottom="44dp"
+        android:text="Volver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textView8" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,7 +19,7 @@ public class LoginActivity extends AppCompatActivity {
     ArrayList<DataStudent> listOfStudents;
     ArrayList<DataCandidate> listOfCandidates;
     EditText et_cedula;
-    Button btnVotar;
+    Button btnVotar, btnResultado;
 
 
     @Override
@@ -29,16 +29,24 @@ public class LoginActivity extends AppCompatActivity {
 
         et_cedula = findViewById(R.id.et_cedula);
         btnVotar = findViewById(R.id.btnVotar);
+        btnResultado = findViewById(R.id.btnResultado);
 
         listOfStudents = new ArrayList<DataStudent>();
         initStudentData();
         listOfCandidates = new ArrayList<DataCandidate>();
         initCandidateData();
-
         btnVotar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 revision();
+            }
+        });
+
+        btnResultado.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentRes = new Intent(getApplicationContext(), ResultActivity.class);
+                startActivity(intentRes);
             }
         });
     }
@@ -104,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         }
-        Toast toast = Toast.makeText(getApplicationContext(), getResources().getText(R.string.invalid_cedula), Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(), getResources().getText(R.string.bienvenido_estudiante), Toast.LENGTH_LONG);
         toast.show();
     }
 
