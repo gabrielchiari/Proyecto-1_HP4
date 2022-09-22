@@ -16,8 +16,8 @@ public class ResultActivity extends AppCompatActivity {
 
     TextView tvMartin, tvVivian, tvOmar;
     Button btnVolver;
-    int totalVotes, omarVotes, vivianVotes, martinVotes, Tlogin;
-    int [] VLogin = new int[3];
+    Integer tVotos;
+    int [] votos = new int[3];
 
     ArrayList<DataCandidate> listOfCandidates;
 
@@ -27,13 +27,8 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         Intent getData = getIntent();
-        VLogin = getData.getIntArrayExtra("ArrayVotos");
-        Tlogin = getData.getIntExtra("TotalVoto", 0);
-
-        /*totalVotes = getData.getIntExtra("totalVotes", 0);
-        martinVotes = getData.getIntExtra("martinVotes", 0);
-        vivianVotes = getData.getIntExtra("vivianVotes", 0);
-        omarVotes = getData.getIntExtra("omarVotes", 0);*/
+        votos = getData.getIntArrayExtra("votos");
+        tVotos = getData.getIntExtra("tVotos", 0);
 
 
         tvMartin = findViewById(R.id.tvMartin);
@@ -41,13 +36,17 @@ public class ResultActivity extends AppCompatActivity {
         tvOmar = findViewById(R.id.tvOmar);
         btnVolver = findViewById(R.id.btnVolver);
 
-        if (Tlogin != 0) {
+        if (tVotos != 0) {
             setView();
         }
 
         btnVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                intent.putExtra("votos", votos);
+                intent.putExtra("tVotos", tVotos);
+                startActivity(intent);
                 finish();
             }
         });
@@ -55,12 +54,12 @@ public class ResultActivity extends AppCompatActivity {
 
     // pinta la data en pantalla
     private void setView() {
-        /*tvMartin.setText("Votos: " + martinVotes + ", Porcentaje: " + ((martinVotes / totalVotes) * 100) + "%");
-        tvVivian.setText("Votos: " + vivianVotes + ", Porcentaje: " + ((vivianVotes / totalVotes) * 100) + "%");
-        tvOmar.setText("Votos: " + omarVotes + ", Porcentaje: " + ((omarVotes / totalVotes) * 100) + "%");*/
-        tvMartin.setText("Votos: " + VLogin[0] + ", Porcentaje: " + ((VLogin[0] / Tlogin) * 100) + "%");
-        tvVivian.setText("Votos: " + VLogin[1] + ", Porcentaje: " + ((VLogin[1] / Tlogin) * 100) + "%");
-        tvOmar.setText("Votos: " + VLogin[2] + ", Porcentaje: " + ((VLogin[2] / Tlogin) * 100) + "%");
+        String martinS = String.format("%.2f", (((votos[0]*1.0) / tVotos) * 100));
+        String vivianS = String.format("%.2f", (((votos[1]*1.0) / tVotos) * 100));
+        String omarS = String.format("%.2f", (((votos[1]*1.0) / tVotos) * 100));
+        tvMartin.setText("Votos: " + votos[0] + ", Porcentaje: " + martinS + "%");
+        tvVivian.setText("Votos: " + votos[1] + ", Porcentaje: " + vivianS + "%");
+        tvOmar.setText("Votos: " + votos[2] + ", Porcentaje: " + omarS + "%");
     }
 
 }

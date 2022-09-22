@@ -15,25 +15,27 @@ import com.gabrielchiari.proyecto_1_hp4.data.DataCandidate;
 import java.util.ArrayList;
 
 public class VoteActivity extends AppCompatActivity {
-    ArrayList<DataCandidate> listOfCandidates;
 
     private RadioGroup rgCandidates;
     private Button btnSendVote;
     private ImageView ivAvatarCandidates;
-    private String voteStudent;
     int [] votos = new int[3];
-    int TVotos;
+    int tVotos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vote);
 
+        Intent getData = getIntent();
+        if(getData.getIntArrayExtra("votos") != null){
+            votos = getData.getIntArrayExtra("votos");
+            tVotos = getData.getIntExtra("tVotos", 0);
+        }
+
         Toast toast = Toast.makeText(getApplicationContext(), getResources().getText(R.string.bienvenido_estudiante), Toast.LENGTH_LONG);
         toast.show();
 
-        Intent getDATA = getIntent();
-        voteStudent = getDATA.getStringExtra("voteStudent");
 
         rgCandidates = findViewById(R.id.rgCandidates);
         ivAvatarCandidates = findViewById(R.id.ivAvatarCandidates);
@@ -65,21 +67,19 @@ public class VoteActivity extends AppCompatActivity {
                 int idcheck = rgCandidates.getCheckedRadioButtonId();
                 if (idcheck == R.id.rbMartin){
                     votos[0] += 1;
-                    TVotos += 1;
+                    tVotos += 1;
                 }
                 if (idcheck == R.id.rbVivian){
                     votos[1] += 1;
-                    TVotos += 1;
+                    tVotos += 1;
                 }
                 if (idcheck == R.id.rbOmar){
                     votos[2] += 1;
-                    TVotos += 1;
+                    tVotos += 1;
                 }
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 intent.putExtra("votos", votos);
-                intent.putExtra("TVotos", TVotos);
-                //intent.putExtra("candidateSelected", rgCandidates.getCheckedRadioButtonId());
-                //intent.putExtra("voteStudent", voteStudent);
+                intent.putExtra("tVotos", tVotos);
                 startActivity(intent);
                 finish();
             }

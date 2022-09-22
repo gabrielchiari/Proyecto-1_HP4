@@ -21,8 +21,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText et_cedula;
     Button btnVotar, btnResultado;
     boolean comprobar = false;
-    int[] VRecibido = new int[3];
-    int TRecibido;
+    int[] votos = new int[3];
+    int tVotos;
 
 
     @Override
@@ -49,23 +49,16 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentRes = new Intent(getApplicationContext(), ResultActivity.class);
-                intentRes.putExtra("ArrayVotos", VRecibido);
-                intentRes.putExtra("TotalVoto", TRecibido);
-                /*intentRes.putExtra("martinVotes", listOfCandidates.get(0).getVotos());
-                intentRes.putExtra("vivianVotes", listOfCandidates.get(1).getVotos());
-                intentRes.putExtra("omarVotes", listOfCandidates.get(2).getVotos());
-                intentRes.putExtra("totalVotes", getTotalVotes());*/
+                intentRes.putExtra("votos", votos);
+                intentRes.putExtra("tVotos", tVotos);
                 startActivity(intentRes);
+                finish();
             }
         });
 
-
-        //int idCandidate = intent.getIntExtra("candidateSelected", 0);
-        //String voteStudent = intent.getStringExtra("voteStudent");
-        /*if (idCandidate != 0) {
-            putVoto(idCandidate);
-            setHasVote(voteStudent);
-        }*/
+        Intent getData = getIntent();
+        votos = getData.getIntArrayExtra("votos");
+        tVotos = getData.getIntExtra("tVotos", 0);
 
     }
 
@@ -125,8 +118,12 @@ public class LoginActivity extends AppCompatActivity {
                     if (!estudiante.getVoted()) {
                         comprobar = true;
                         Intent votar = new Intent(getApplicationContext(), VoteActivity.class);
-                        votar.putExtra("voteStudent", estudiante.getCedula());
+                        if(tVotos > 0 ){
+                            votar.putExtra("votos", votos);
+                            votar.putExtra("tVotos", tVotos);
+                        }
                         startActivity(votar);
+                        finish();
                         break;
                     } else {
                         throw new IllegalArgumentException((String) getResources().getText(R.string.done_vote));
@@ -144,33 +141,6 @@ public class LoginActivity extends AppCompatActivity {
         comprobar = false;
     }
 
-    //funcion de asignacion voto al candidato
-    private void putVoto(int idCandidate) {
-        for (DataCandidate candidate : listOfCandidates) {
-            if (candidate.getId() == idCandidate) {
-                candidate.setVotos(+1);
-            }
-        }
-    }
-
-    //funcion para asignarle que ya voto al estudiante
-    private void setHasVote(String cedula) {
-        for (DataStudent estudiante : listOfStudents) {
-            if (estudiante.getCedula().equals(cedula)) {
-                estudiante.setVoted(true);
-            }
-        }
-
-    }
-
-    // obtiene el total de votos realizados
-    private int getTotalVotes() {
-        Integer totalVotes = 0;
-        for (DataCandidate candidate : listOfCandidates) {
-            totalVotes += candidate.getVotos();
-        }
-        return totalVotes;
-    }
 }
 
 
