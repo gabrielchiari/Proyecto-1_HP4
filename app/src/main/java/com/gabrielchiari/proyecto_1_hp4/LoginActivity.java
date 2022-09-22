@@ -21,6 +21,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText et_cedula;
     Button btnVotar, btnResultado;
     boolean comprobar = false;
+    int[] VRecibido = new int[3];
+    int TRecibido;
 
 
     @Override
@@ -47,21 +49,23 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentRes = new Intent(getApplicationContext(), ResultActivity.class);
-                intentRes.putExtra("martinVotes", listOfCandidates.get(0).getVotos());
+                intentRes.putExtra("ArrayVotos", VRecibido);
+                intentRes.putExtra("TotalVoto", TRecibido);
+                /*intentRes.putExtra("martinVotes", listOfCandidates.get(0).getVotos());
                 intentRes.putExtra("vivianVotes", listOfCandidates.get(1).getVotos());
                 intentRes.putExtra("omarVotes", listOfCandidates.get(2).getVotos());
-                intentRes.putExtra("totalVotes", getTotalVotes());
+                intentRes.putExtra("totalVotes", getTotalVotes());*/
                 startActivity(intentRes);
             }
         });
 
-        Intent intent = getIntent();
-        int idCandidate = intent.getIntExtra("candidateSelected", 0);
-        String voteStudent = intent.getStringExtra("voteStudent");
-        if (idCandidate != 0) {
+
+        //int idCandidate = intent.getIntExtra("candidateSelected", 0);
+        //String voteStudent = intent.getStringExtra("voteStudent");
+        /*if (idCandidate != 0) {
             putVoto(idCandidate);
             setHasVote(voteStudent);
-        }
+        }*/
 
     }
 
@@ -133,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG);
             toast.show();
         }
-        if (comprobar == false){
+        if (comprobar = false){
             Toast toast = Toast.makeText(getApplicationContext(),  getResources().getText(R.string.invalid_cedula),Toast.LENGTH_SHORT);
             toast.show();
         }

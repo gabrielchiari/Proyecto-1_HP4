@@ -21,6 +21,8 @@ public class VoteActivity extends AppCompatActivity {
     private Button btnSendVote;
     private ImageView ivAvatarCandidates;
     private String voteStudent;
+    int [] votos = new int[3];
+    int TVotos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +62,24 @@ public class VoteActivity extends AppCompatActivity {
         btnSendVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int idcheck = rgCandidates.getCheckedRadioButtonId();
+                if (idcheck == R.id.rbMartin){
+                    votos[0] += 1;
+                    TVotos += 1;
+                }
+                if (idcheck == R.id.rbVivian){
+                    votos[1] += 1;
+                    TVotos += 1;
+                }
+                if (idcheck == R.id.rbOmar){
+                    votos[2] += 1;
+                    TVotos += 1;
+                }
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                intent.putExtra("candidateSelected", rgCandidates.getCheckedRadioButtonId());
-                intent.putExtra("voteStudent", voteStudent);
+                intent.putExtra("votos", votos);
+                intent.putExtra("TVotos", TVotos);
+                //intent.putExtra("candidateSelected", rgCandidates.getCheckedRadioButtonId());
+                //intent.putExtra("voteStudent", voteStudent);
                 startActivity(intent);
                 finish();
             }
