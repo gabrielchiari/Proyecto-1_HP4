@@ -20,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     ArrayList<DataCandidate> listOfCandidates;
     EditText et_cedula;
     Button btnVotar, btnResultado;
+    boolean comprobar = false;
 
 
     @Override
@@ -71,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initStudentData() {
-        listOfStudents.add(new DataStudent("08-0944-000327", "Edwin", "Arrocha", "M"));
+        listOfStudents.add(new DataStudent("08-0944-000327", "EDWIN", "ARROCHA", "M"));
         listOfStudents.add(new DataStudent("03-0740-001394", "MICHELLE", "BRENES", "F"));
         listOfStudents.add(new DataStudent("20-0053-004282", "EDDY", "BUSTAMANTE ", "M"));
         listOfStudents.add(new DataStudent("08-0943-001867", "ALEJANDRA", "CABALLERO", "F"));
@@ -118,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
             for (DataStudent estudiante : listOfStudents) {
                 if (et_cedula.getText().toString().equals(estudiante.getCedula())) {
                     if (!estudiante.getVoted()) {
+                        comprobar = true;
                         Intent votar = new Intent(getApplicationContext(), VoteActivity.class);
                         votar.putExtra("voteStudent", estudiante.getCedula());
                         startActivity(votar);
@@ -131,6 +133,11 @@ public class LoginActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG);
             toast.show();
         }
+        if (comprobar == false){
+            Toast toast = Toast.makeText(getApplicationContext(),  getResources().getText(R.string.invalid_cedula),Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        comprobar = false;
     }
 
     //funcion de asignacion voto al candidato
