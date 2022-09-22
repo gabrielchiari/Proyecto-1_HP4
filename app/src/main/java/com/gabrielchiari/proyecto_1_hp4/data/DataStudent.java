@@ -1,6 +1,11 @@
 package com.gabrielchiari.proyecto_1_hp4.data;
 
-public class DataStudent {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
+public class DataStudent implements Serializable {
     private String cedula, nombre, apellido, genero;
     private boolean voted = false;
 

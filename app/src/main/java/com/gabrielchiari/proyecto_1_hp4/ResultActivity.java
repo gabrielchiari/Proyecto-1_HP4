@@ -9,11 +9,13 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gabrielchiari.proyecto_1_hp4.data.DataCandidate;
+import com.gabrielchiari.proyecto_1_hp4.data.DataStudent;
 
 import java.util.ArrayList;
 
 public class ResultActivity extends AppCompatActivity {
 
+    ArrayList<DataStudent> listOfStudents;
     TextView tvMartin, tvVivian, tvOmar;
     Button btnVolver;
     Integer tVotos;
@@ -29,6 +31,8 @@ public class ResultActivity extends AppCompatActivity {
         Intent getData = getIntent();
         votos = getData.getIntArrayExtra("votos");
         tVotos = getData.getIntExtra("tVotos", 0);
+        tVotos = getData.getIntExtra("tVotos", 0);
+        listOfStudents = (ArrayList<DataStudent>) getData.getSerializableExtra("listOfStudents");
 
 
         tvMartin = findViewById(R.id.tvMartin);
@@ -46,6 +50,7 @@ public class ResultActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 intent.putExtra("votos", votos);
                 intent.putExtra("tVotos", tVotos);
+                intent.putExtra("listOfStudents", listOfStudents);
                 startActivity(intent);
                 finish();
             }
@@ -56,7 +61,7 @@ public class ResultActivity extends AppCompatActivity {
     private void setView() {
         String martinS = String.format("%.2f", (((votos[0]*1.0) / tVotos) * 100));
         String vivianS = String.format("%.2f", (((votos[1]*1.0) / tVotos) * 100));
-        String omarS = String.format("%.2f", (((votos[1]*1.0) / tVotos) * 100));
+        String omarS = String.format("%.2f", (((votos[2]*1.0) / tVotos) * 100));
         tvMartin.setText("Votos: " + votos[0] + ", Porcentaje: " + martinS + "%");
         tvVivian.setText("Votos: " + votos[1] + ", Porcentaje: " + vivianS + "%");
         tvOmar.setText("Votos: " + votos[2] + ", Porcentaje: " + omarS + "%");

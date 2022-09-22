@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.gabrielchiari.proyecto_1_hp4.data.DataCandidate;
 import com.gabrielchiari.proyecto_1_hp4.data.DataStudent;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
@@ -20,7 +21,6 @@ public class LoginActivity extends AppCompatActivity {
     ArrayList<DataCandidate> listOfCandidates;
     EditText et_cedula;
     Button btnVotar, btnResultado;
-    boolean comprobar = false;
     int[] votos = new int[3];
     int tVotos;
 
@@ -51,14 +51,20 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intentRes = new Intent(getApplicationContext(), ResultActivity.class);
                 intentRes.putExtra("votos", votos);
                 intentRes.putExtra("tVotos", tVotos);
+                intentRes.putExtra("listOfStudents",listOfStudents);
+
+
                 startActivity(intentRes);
                 finish();
             }
         });
 
         Intent getData = getIntent();
-        votos = getData.getIntArrayExtra("votos");
         tVotos = getData.getIntExtra("tVotos", 0);
+        if (tVotos > 0){
+            votos = getData.getIntArrayExtra("votos");
+            listOfStudents = (ArrayList<DataStudent>) getData.getSerializableExtra("listOfStudents");
+        }
 
     }
 
@@ -116,29 +122,25 @@ public class LoginActivity extends AppCompatActivity {
             for (DataStudent estudiante : listOfStudents) {
                 if (et_cedula.getText().toString().equals(estudiante.getCedula())) {
                     if (!estudiante.getVoted()) {
-                        comprobar = true;
                         Intent votar = new Intent(getApplicationContext(), VoteActivity.class);
                         if(tVotos > 0 ){
                             votar.putExtra("votos", votos);
                             votar.putExtra("tVotos", tVotos);
                         }
+                        votar.putExtra("dniStudent",estudiante.getCedula());
+                        votar.putExtra("listOfStudents",listOfStudents);
                         startActivity(votar);
-                        finish();
-                        break;
+                        return;
                     } else {
                         throw new IllegalArgumentException((String) getResources().getText(R.string.done_vote));
                     }
                 }
             }
+            throw new IllegalArgumentException((String) getResources().getText(R.string.invalid_cedula));
         } catch (IllegalArgumentException e) {
             Toast toast = Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG);
             toast.show();
         }
-        if (comprobar = false){
-            Toast toast = Toast.makeText(getApplicationContext(),  getResources().getText(R.string.invalid_cedula),Toast.LENGTH_SHORT);
-            toast.show();
-        }
-        comprobar = false;
     }
 
 }
