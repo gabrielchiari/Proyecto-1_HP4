@@ -3,7 +3,7 @@ package com.gabrielchiari.proyecto_1_hp4.utils;
 import com.google.gson.Gson;
 
 public class GsonHelper {
-    private static Gson gson = new Gson();
+    private static final Gson gson = new Gson();
 
     public static String serialize(Object object) {
         return gson.toJson(object);

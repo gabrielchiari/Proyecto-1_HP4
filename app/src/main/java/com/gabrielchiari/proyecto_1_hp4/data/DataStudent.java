@@ -8,23 +8,49 @@ public class DataStudent {
         this.cedula = ced;
         this.nombre = nom;
         this.apellido = ape;
-        this.genero = gene;}
+        this.genero = gene;
+    }
 
 
-    public String getCedula() {return cedula;}
-    public void setCedula(String ced) {this.cedula = ced;}
+    public String getCedula() {
+        return cedula;
+    }
 
-    public String getNombre() {return nombre;}
-    public void setNombre(String nom) {this.nombre = nom;}
+    public void setCedula(String ced) {
+        this.cedula = ced;
+    }
 
-    public String getApellido() {return apellido;}
-    public void setApellido(String ape) {this.apellido = ape;}
+    public String getNombre() {
+        return nombre;
+    }
 
-    public String getGenero() {return genero;}
-    public void setGenero(String gene) {this.genero = gene;}
+    public void setNombre(String nom) {
+        this.nombre = nom;
+    }
 
-    public boolean getVoted() {return voted;}
-    public void setVoted(boolean votado) {this.voted = votado;}
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String ape) {
+        this.apellido = ape;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String gene) {
+        this.genero = gene;
+    }
+
+    public boolean getVoted() {
+        return voted;
+    }
+
+    public void setVoted(boolean votado) {
+        this.voted = votado;
+    }
 
 }
 

@@ -4,11 +4,68 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingTop="20dp"
     tools:context=".VoteActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rector_elections"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/utp"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        />
 
-    <ListView
-        android:id="@+id/listOfCandidates"
+    <ImageView
+        android:id="@+id/ivAvatarCandidates"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_margin="25dp"
+        tools:srcCompat = "@drawable/ing_martin_candanedo"
+        />
+
+    <RadioGroup
+        android:id="@+id/rgCandidates"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
+        >
+        <RadioButton
+            android:id="@+id/rbMartin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/candidato_martin_candanedo"
+            />
+        <RadioButton
+            android:id="@+id/rbOmar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/candidato_omar_aizpurua"
+            />
+        <RadioButton
+            android:id="@+id/rbVivian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/candidato_vivian_valenzuela"
+            />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/btnSendVote"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/black"
+        android:text="@string/vote"
+        android:textSize="18sp"
+        android:layout_margin="25dp"
+        />
 
 </LinearLayout>

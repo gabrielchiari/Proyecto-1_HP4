@@ -20,7 +20,6 @@ public class LoginActivity extends AppCompatActivity {
     ArrayList<DataCandidate> listOfCandidates;
     EditText et_cedula;
     Button btnVotar, btnResultado;
-    boolean comprobar = false;
 
 
     @Override
@@ -36,31 +35,44 @@ public class LoginActivity extends AppCompatActivity {
         initStudentData();
         listOfCandidates = new ArrayList<DataCandidate>();
         initCandidateData();
+
         btnVotar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 revision();
             }
         });
-
         btnResultado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentRes = new Intent(getApplicationContext(), ResultActivity.class);
+                intentRes.putExtra("martinVotes", listOfCandidates.get(0).getVotos());
+                intentRes.putExtra("vivianVotes", listOfCandidates.get(1).getVotos());
+                intentRes.putExtra("omarVotes", listOfCandidates.get(2).getVotos());
+                intentRes.putExtra("totalVotes", getTotalVotes());
                 startActivity(intentRes);
             }
         });
+
+        Intent intent = getIntent();
+        int idCandidate = intent.getIntExtra("candidateSelected", 0);
+        String voteStudent = intent.getStringExtra("voteStudent");
+        if (idCandidate != 0) {
+            putVoto(idCandidate);
+            setHasVote(voteStudent);
+        }
+
     }
 
     private void initCandidateData() {
-        listOfCandidates.add(new DataCandidate(1, R.drawable.ing_martin_candanedo, getResources().getString(R.string.candidato_martin_candanedo)));
-        listOfCandidates.add(new DataCandidate(2, R.drawable.mgtr_vivian_valenzuelar, getResources().getString(R.string.candidato_vivian_valenzuela)));
-        listOfCandidates.add(new DataCandidate(3, R.drawable.omar_o_aizpurua_p, getResources().getString(R.string.candidato_omar_aizpurua)));
+        listOfCandidates.add(new DataCandidate(R.id.rbMartin, R.drawable.ing_martin_candanedo, getResources().getString(R.string.candidato_martin_candanedo)));
+        listOfCandidates.add(new DataCandidate(R.id.rbVivian, R.drawable.mgtr_vivian_valenzuelar, getResources().getString(R.string.candidato_vivian_valenzuela)));
+        listOfCandidates.add(new DataCandidate(R.id.rbOmar, R.drawable.omar_o_aizpurua_p, getResources().getString(R.string.candidato_omar_aizpurua)));
     }
 
     private void initStudentData() {
         listOfStudents.add(new DataStudent("08-0944-000327", "Edwin", "Arrocha", "M"));
-        listOfStudents.add(new DataStudent("03-0740-001394","MICHELLE", "BRENES", "F"));
+        listOfStudents.add(new DataStudent("03-0740-001394", "MICHELLE", "BRENES", "F"));
         listOfStudents.add(new DataStudent("20-0053-004282", "EDDY", "BUSTAMANTE ", "M"));
         listOfStudents.add(new DataStudent("08-0943-001867", "ALEJANDRA", "CABALLERO", "F"));
         listOfStudents.add(new DataStudent("08-0937-000503", "GABRIEL", "CHIARI", "M"));
@@ -102,38 +114,51 @@ public class LoginActivity extends AppCompatActivity {
 
     //funcion para revisar si existe o no la cedula
     public void revision() {
-        for (DataStudent estudiante : listOfStudents) {
-            if (et_cedula.getText().toString().equals(estudiante.getCedula())) {
-                if (estudiante.getVoted() == false) {
-                    this.comprobar = true;
-                    Intent votar = new Intent(getApplicationContext(), VoteActivity.class);
-                    startActivity(votar);
-                } else {
-                    Toast toast = Toast.makeText(getApplicationContext(), getResources().getText(R.string.done_vote), Toast.LENGTH_LONG);
-                    toast.show();
+        try {
+            for (DataStudent estudiante : listOfStudents) {
+                if (et_cedula.getText().toString().equals(estudiante.getCedula())) {
+                    if (!estudiante.getVoted()) {
+                        Intent votar = new Intent(getApplicationContext(), VoteActivity.class);
+                        votar.putExtra("voteStudent", estudiante.getCedula());
+                        startActivity(votar);
+                        break;
+                    } else {
+                        throw new IllegalArgumentException((String) getResources().getText(R.string.done_vote));
+                    }
                 }
             }
-        }
-        if (this.comprobar == true){
-            Toast toast = Toast.makeText(getApplicationContext(), getResources().getText(R.string.bienvenido_estudiante), Toast.LENGTH_SHORT);
+        } catch (IllegalArgumentException e) {
+            Toast toast = Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG);
             toast.show();
         }
-        else{
-            Toast toast = Toast.makeText(getApplicationContext(), getResources().getText(R.string.invalid_cedula), Toast.LENGTH_LONG);
-            toast.show();
-        }
-        this.comprobar = false;
     }
 
-    //funcion para cambiar el voto recibido
-    public void voto() {
-        for (DataStudent estudiante : listOfStudents) {
-            if (et_cedula.getText().toString().equals(estudiante.getCedula())) {
-                Intent intent = getIntent();
-                estudiante.setVoted(intent.getBooleanExtra("voto_rec", false));
-
+    //funcion de asignacion voto al candidato
+    private void putVoto(int idCandidate) {
+        for (DataCandidate candidate : listOfCandidates) {
+            if (candidate.getId() == idCandidate) {
+                candidate.setVotos(+1);
             }
         }
+    }
+
+    //funcion para asignarle que ya voto al estudiante
+    private void setHasVote(String cedula) {
+        for (DataStudent estudiante : listOfStudents) {
+            if (estudiante.getCedula().equals(cedula)) {
+                estudiante.setVoted(true);
+            }
+        }
+
+    }
+
+    // obtiene el total de votos realizados
+    private int getTotalVotes() {
+        Integer totalVotes = 0;
+        for (DataCandidate candidate : listOfCandidates) {
+            totalVotes += candidate.getVotos();
+        }
+        return totalVotes;
     }
 }
 
