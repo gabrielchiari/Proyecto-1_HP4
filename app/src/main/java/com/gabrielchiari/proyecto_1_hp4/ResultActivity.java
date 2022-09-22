@@ -11,7 +11,7 @@ import android.widget.TextView;
 public class ResultActivity extends AppCompatActivity {
 
     TextView tvMartin, tvVivian, tvOmar;
-    Button btnVolver;
+    Button btnVolver, btnMostrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,5 +30,19 @@ public class ResultActivity extends AppCompatActivity {
                 startActivity(intentVolver);
             }
         });
+
+        //Boton para mostrar la cantidad de votos
+        /*btnMostrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentMostrar = getIntent();
+                String getVotos = intentMostrar.getStringExtra("");
+                String getVotos2 = intentMostrar.getStringExtra("");
+                String getVotos3 = intentMostrar.getStringExtra("");
+                tvMartin.setText("Votos: " + getVotos);
+                tvVivian.setText("Votos: " + getVotos2);
+                tvOmar.setText("Votos: " + getVotos3);
+            }
+        });*/
     }
 }

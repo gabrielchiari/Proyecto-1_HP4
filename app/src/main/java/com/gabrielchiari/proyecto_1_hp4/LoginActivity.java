@@ -20,6 +20,7 @@ public class LoginActivity extends AppCompatActivity {
     ArrayList<DataCandidate> listOfCandidates;
     EditText et_cedula;
     Button btnVotar, btnResultado;
+    boolean comprobar = false;
 
 
     @Override
@@ -99,11 +100,12 @@ public class LoginActivity extends AppCompatActivity {
         listOfStudents.add(new DataStudent("03-0745-000950", "EIMY", "GUERRA", "F"));
     }
 
-
+    //funcion para revisar si existe o no la cedula
     public void revision() {
         for (DataStudent estudiante : listOfStudents) {
             if (et_cedula.getText().toString().equals(estudiante.getCedula())) {
                 if (estudiante.getVoted() == false) {
+                    this.comprobar = true;
                     Intent votar = new Intent(getApplicationContext(), VoteActivity.class);
                     startActivity(votar);
                 } else {
@@ -112,11 +114,18 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         }
-        Toast toast = Toast.makeText(getApplicationContext(), getResources().getText(R.string.bienvenido_estudiante), Toast.LENGTH_LONG);
-        toast.show();
+        if (this.comprobar == true){
+            Toast toast = Toast.makeText(getApplicationContext(), getResources().getText(R.string.bienvenido_estudiante), Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        else{
+            Toast toast = Toast.makeText(getApplicationContext(), getResources().getText(R.string.invalid_cedula), Toast.LENGTH_LONG);
+            toast.show();
+        }
+        this.comprobar = false;
     }
 
-
+    //funcion para cambiar el voto recibido
     public void voto() {
         for (DataStudent estudiante : listOfStudents) {
             if (et_cedula.getText().toString().equals(estudiante.getCedula())) {
