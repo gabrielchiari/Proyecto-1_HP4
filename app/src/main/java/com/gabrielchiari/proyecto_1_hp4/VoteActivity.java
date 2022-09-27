@@ -18,10 +18,10 @@ import java.util.ArrayList;
 
 public class VoteActivity extends AppCompatActivity {
     private ArrayList<DataStudent> listOfStudents;
+    private ArrayList<DataCandidate> listOfCandidates;
     private RadioGroup rgCandidates;
     private Button btnSendVote;
     private ImageView ivAvatarCandidates;
-    private int [] votos = new int[3];
     private int tVotos;
     private String dniStudent;
 
@@ -31,10 +31,11 @@ public class VoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vote);
 
         Intent getData = getIntent();
+        //recibiendo la cedula del que voto
         dniStudent = getData.getStringExtra("dniStudent");
         listOfStudents = (ArrayList<DataStudent>) getData.getSerializableExtra("listOfStudents");
-        if(getData.getIntArrayExtra("votos") != null){
-            votos = getData.getIntArrayExtra("votos");
+        listOfCandidates = (ArrayList<DataCandidate>) getData.getSerializableExtra("listOfCandidates");
+        if (getData.getIntArrayExtra("votos") != null) {
             tVotos = getData.getIntExtra("tVotos", 0);
         }
 
@@ -69,35 +70,32 @@ public class VoteActivity extends AppCompatActivity {
         btnSendVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int idcheck = rgCandidates.getCheckedRadioButtonId();
-                if (idcheck == R.id.rbMartin){
-                    votos[0] += 1;
-                    tVotos += 1;
+            //Se pasa el arraylist, por lo cual no hay necesidad de usar otras variables, solo cambias el valor de la variable en la misma lista y pasas la lista
+                for (DataCandidate candidatos : listOfCandidates) {
+                    if (candidatos.getId() == (rgCandidates.getCheckedRadioButtonId())) {
+                        candidatos.setVotos(+1);
+                        tVotos += 1;
+                    }
                 }
-                if (idcheck == R.id.rbVivian){
-                    votos[1] += 1;
-                    tVotos += 1;
-                }
-                if (idcheck == R.id.rbOmar){
-                    votos[2] += 1;
-                    tVotos += 1;
-                }
+                //pasando las  listas con los nuevos valores
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                intent.putExtra("votos", votos);
                 intent.putExtra("tVotos", tVotos);
-                hasVote();
-                intent.putExtra("listOfStudents",listOfStudents);
+                putVote();
+                intent.putExtra("listOfStudents", listOfStudents);
+                intent.putExtra("listOfCandidates", listOfCandidates);
                 startActivity(intent);
                 finish();
             }
+
         });
 
 
     }
+
     // se le asigna al estudiante que ya voto
-    private void  hasVote(){
-        for (DataStudent estudiante: listOfStudents){
-            if (estudiante.getCedula().equals(dniStudent)){
+    private void putVote() {
+        for (DataStudent estudiante : listOfStudents) {
+            if (estudiante.getCedula().equals(dniStudent)) {
                 estudiante.setVoted(true);
             }
         }

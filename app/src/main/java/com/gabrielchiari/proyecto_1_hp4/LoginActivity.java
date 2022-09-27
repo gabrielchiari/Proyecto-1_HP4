@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.gabrielchiari.proyecto_1_hp4.data.DataCandidate;
 import com.gabrielchiari.proyecto_1_hp4.data.DataStudent;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
@@ -21,7 +20,6 @@ public class LoginActivity extends AppCompatActivity {
     ArrayList<DataCandidate> listOfCandidates;
     EditText et_cedula;
     Button btnVotar, btnResultado;
-    int[] votos = new int[3];
     int tVotos;
 
 
@@ -48,11 +46,12 @@ public class LoginActivity extends AppCompatActivity {
         btnResultado.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Este intent pasa todos los datos que se obtuvieron en votActivity a resultActivity
                 Intent intentRes = new Intent(getApplicationContext(), ResultActivity.class);
-                intentRes.putExtra("votos", votos);
                 intentRes.putExtra("tVotos", tVotos);
+                //pasando las listas entre los intents
                 intentRes.putExtra("listOfStudents",listOfStudents);
-
+                intentRes.putExtra("listOfCandidates",listOfCandidates);
 
                 startActivity(intentRes);
                 finish();
@@ -62,8 +61,8 @@ public class LoginActivity extends AppCompatActivity {
         Intent getData = getIntent();
         tVotos = getData.getIntExtra("tVotos", 0);
         if (tVotos > 0){
-            votos = getData.getIntArrayExtra("votos");
             listOfStudents = (ArrayList<DataStudent>) getData.getSerializableExtra("listOfStudents");
+            listOfCandidates = (ArrayList<DataCandidate>) getData.getSerializableExtra("listOfCandidates");
         }
 
     }
@@ -123,12 +122,10 @@ public class LoginActivity extends AppCompatActivity {
                 if (et_cedula.getText().toString().equals(estudiante.getCedula())) {
                     if (!estudiante.getVoted()) {
                         Intent votar = new Intent(getApplicationContext(), VoteActivity.class);
-                        if(tVotos > 0 ){
-                            votar.putExtra("votos", votos);
-                            votar.putExtra("tVotos", tVotos);
-                        }
+                        votar.putExtra("tVotos", tVotos);
                         votar.putExtra("dniStudent",estudiante.getCedula());
                         votar.putExtra("listOfStudents",listOfStudents);
+                        votar.putExtra("listOfCandidates",listOfCandidates);
                         startActivity(votar);
                         return;
                     } else {

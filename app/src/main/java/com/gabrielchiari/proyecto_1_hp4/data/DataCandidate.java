@@ -1,6 +1,8 @@
 package com.gabrielchiari.proyecto_1_hp4.data;
 
-public class DataCandidate {
+import java.io.Serializable;
+
+public class DataCandidate implements Serializable {
     private String nombreCompleto;
     private int _id, votosAdquiridos = 0, fotoPerfil;
 

@@ -16,12 +16,12 @@ import java.util.ArrayList;
 public class ResultActivity extends AppCompatActivity {
 
     ArrayList<DataStudent> listOfStudents;
+    ArrayList<DataCandidate> listOfCandidates;
     TextView tvMartin, tvVivian, tvOmar;
     Button btnVolver;
     Integer tVotos;
-    int [] votos = new int[3];
+    TextView[] imprimir;
 
-    ArrayList<DataCandidate> listOfCandidates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +29,16 @@ public class ResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_result);
 
         Intent getData = getIntent();
-        votos = getData.getIntArrayExtra("votos");
-        tVotos = getData.getIntExtra("tVotos", 0);
         tVotos = getData.getIntExtra("tVotos", 0);
         listOfStudents = (ArrayList<DataStudent>) getData.getSerializableExtra("listOfStudents");
+        listOfCandidates = (ArrayList<DataCandidate>) getData.getSerializableExtra("listOfCandidates");
 
 
         tvMartin = findViewById(R.id.tvMartin);
         tvVivian = findViewById(R.id.tvVivian);
         tvOmar = findViewById(R.id.tvOmar);
         btnVolver = findViewById(R.id.btnVolver);
+        imprimir = new TextView[]{tvMartin, tvVivian, tvOmar};
 
         if (tVotos != 0) {
             setView();
@@ -48,9 +48,9 @@ public class ResultActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                intent.putExtra("votos", votos);
                 intent.putExtra("tVotos", tVotos);
                 intent.putExtra("listOfStudents", listOfStudents);
+                intent.putExtra("listOfCandidates",listOfCandidates);
                 startActivity(intent);
                 finish();
             }
@@ -59,12 +59,10 @@ public class ResultActivity extends AppCompatActivity {
 
     // pinta la data en pantalla
     private void setView() {
-        String martinS = String.format("%.2f", (((votos[0]*1.0) / tVotos) * 100));
-        String vivianS = String.format("%.2f", (((votos[1]*1.0) / tVotos) * 100));
-        String omarS = String.format("%.2f", (((votos[2]*1.0) / tVotos) * 100));
-        tvMartin.setText("Votos: " + votos[0] + ", Porcentaje: " + martinS + "%");
-        tvVivian.setText("Votos: " + votos[1] + ", Porcentaje: " + vivianS + "%");
-        tvOmar.setText("Votos: " + votos[2] + ", Porcentaje: " + omarS + "%");
+        for (int j =0; j < imprimir.length; j++){
+            String porcentaje = String.format("%.2f", (((listOfCandidates.get(j).getVotos()*1.0) / tVotos) * 100));
+            imprimir[j].setText("Votos: " + listOfCandidates.get(j).getVotos() + ", Porcentaje: " + porcentaje + "%");
+        }
     }
 
 }
