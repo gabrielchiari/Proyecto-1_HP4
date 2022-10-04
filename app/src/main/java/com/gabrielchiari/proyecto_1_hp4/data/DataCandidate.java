@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class DataCandidate implements Serializable {
     private String nombreCompleto;
-    private int _id, votosAdquiridos = 0, fotoPerfil;
+    private int _id, votosAdquiridos = 0, fotoPerfil, total = 0;
 
     public DataCandidate(int id, int avatar, String fullName) {
         _id = id;
@@ -34,6 +34,13 @@ public class DataCandidate implements Serializable {
 
     public void setVotos(int votos) {
         votosAdquiridos = votos;
+    }
+    public int getTotal() {
+        return total;
+    }
+
+    public void setTotal(int total) {
+        total = total;
     }
 
     public String getFullName() {

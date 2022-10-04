@@ -55,6 +55,21 @@ public class LoginActivity extends AppCompatActivity {
 
                 startActivity(intentRes);
                 finish();
+
+                /*if(!hayEmpate()) {
+                    Intent intentRes = new Intent(getApplicationContext(), ResultActivity.class);
+                    intentRes.putExtra("tVotos", tVotos);
+                    //pasando las listas entre los intents
+                    intentRes.putExtra("listOfStudents",listOfStudents);
+                    intentRes.putExtra("listOfCandidates",listOfCandidates);
+
+                    startActivity(intentRes);
+                    finish();
+                }
+                else{
+                    Toast toast = Toast.makeText(getApplicationContext(), "EXISTE EMPATE. POR FAVOR REALICE UN VOTO QUE NO SEA EQUITATIVO", Toast.LENGTH_LONG);
+                    toast.show();
+                }*/
             }
         });
 
@@ -139,6 +154,18 @@ public class LoginActivity extends AppCompatActivity {
             toast.show();
         }
     }
+    /*boolean hayEmpate() {
+        for(int i = 0; i < listOfCandidates.size(); i++){
+            for(int x = 0; x < listOfCandidates.size(); x++){
+                if (i == x)
+                    continue;
+                if (listOfCandidates.get(i).getVotos() == listOfCandidates.get(x).getVotos()){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }*/
 
 }
 

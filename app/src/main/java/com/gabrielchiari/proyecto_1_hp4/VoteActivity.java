@@ -22,7 +22,7 @@ public class VoteActivity extends AppCompatActivity {
     private RadioGroup rgCandidates;
     private Button btnSendVote;
     private ImageView ivAvatarCandidates;
-    private int tVotos;
+    public int tVotos;
     private String dniStudent;
 
     @Override
@@ -35,9 +35,8 @@ public class VoteActivity extends AppCompatActivity {
         dniStudent = getData.getStringExtra("dniStudent");
         listOfStudents = (ArrayList<DataStudent>) getData.getSerializableExtra("listOfStudents");
         listOfCandidates = (ArrayList<DataCandidate>) getData.getSerializableExtra("listOfCandidates");
-        if (getData.getIntArrayExtra("votos") != null) {
+
             tVotos = getData.getIntExtra("tVotos", 0);
-        }
 
 //        Toast toast = Toast.makeText(getApplicationContext(), getResources().getText(R.string.bienvenido_estudiante), Toast.LENGTH_LONG);
 //        toast.show();
